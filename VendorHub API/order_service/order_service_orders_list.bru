@@ -1,0 +1,21 @@
+meta {
+  name: order_service_orders_list
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/order_service/orders/
+  body: none
+  auth: bearer
+}
+
+params:query {
+  ~ordering: 
+  ~page: 
+  ~search: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

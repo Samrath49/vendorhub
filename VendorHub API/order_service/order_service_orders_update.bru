@@ -1,0 +1,27 @@
+meta {
+  name: order_service_orders_update
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{baseUrl}}/api/order_service/orders/:id/
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "user": "",
+    "total_amount": "",
+    "status": ""
+  }
+}
