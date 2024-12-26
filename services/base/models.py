@@ -14,7 +14,7 @@ class TimeStampedModel(models.Model):
 class User(AbstractUser):
     phone = models.CharField(max_length=15, blank=True)
     address = models.TextField(blank=True)
-
+    is_vendor = models.BooleanField(default=False)
 
 class Vendor(TimeStampedModel):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
