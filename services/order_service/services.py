@@ -1,10 +1,9 @@
 from ..base.service import BaseService
-from ..base.models import Order, OrderItem
+from ..base.models import Order, OrderItem, Product
 from ..product_service.services import ProductService
 from ..payment_service.services import PaymentService
 from ..shipment_service.services import ShipmentService
 from django.db import transaction
-from ..product_service.models import Product
 
 class OrderService(BaseService):
     def __init__(self):

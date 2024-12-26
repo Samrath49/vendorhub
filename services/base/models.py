@@ -39,15 +39,14 @@ class Category(TimeStampedModel):
 
 
 class Product(TimeStampedModel):
-    vendor = models.ForeignKey(
-        Vendor, on_delete=models.CASCADE, related_name='products')
+    vendor = models.ForeignKey(Vendor, on_delete=models.CASCADE, related_name='products')
     name = models.CharField(max_length=255)
     description = models.TextField()
-    category = models.ForeignKey(
-        Category, on_delete=models.SET_NULL, null=True)
+    category = models.ForeignKey('product_service.Category', on_delete=models.SET_NULL, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     stock = models.IntegerField(default=0)
     is_active = models.BooleanField(default=True)
+    low_stock_threshold = models.IntegerField(default=10)
 
     class Meta:
         indexes = [

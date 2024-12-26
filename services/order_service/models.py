@@ -1,7 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator
-from services.base.models import TimeStampedModel, Order as BaseOrder, OrderItem as BaseOrderItem
-
+from services.base.models import TimeStampedModel, Order as BaseOrder
+from services.base.models import OrderItem
 
 class OrderService(TimeStampedModel):
     """Extended order functionality specific to order service"""
