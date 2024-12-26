@@ -1,22 +1,28 @@
 from django.db import models
-from services.base.models import TimeStampedModel
+from django.core.validators import MinValueValidator
+from services.base.models import TimeStampedModel, Order as BaseOrder, OrderItem as BaseOrderItem
 
 
-class Order(TimeStampedModel):
-    user = models.IntegerField()  # Assuming user management is separate
-    status = models.CharField(max_length=20, default='pending')
-    total_amount = models.DecimalField(max_digits=10, decimal_places=2)
+class OrderService(TimeStampedModel):
+    """Extended order functionality specific to order service"""
+    order = models.OneToOneField(
+        BaseOrder, on_delete=models.CASCADE, related_name='order_service')
+    shipping_method = models.CharField(max_length=50)
+    estimated_delivery = models.DateTimeField(null=True)
+    notes = models.TextField(blank=True)
 
     class Meta:
         indexes = [
-            models.Index(fields=['user']),
-            models.Index(fields=['status']),
+            models.Index(fields=['estimated_delivery']),
         ]
 
-class OrderItem(TimeStampedModel):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
-    product = models.ForeignKey('product_service.Product', on_delete=models.PROTECT)
-    vendor = models.ForeignKey('product_service.Vendor', on_delete=models.PROTECT)
-    quantity = models.IntegerField()
-    unit_price = models.DecimalField(max_digits=10, decimal_places=2)
-    total_price = models.DecimalField(max_digits=10, decimal_places=2)
+
+class OrderTracking(TimeStampedModel):
+    """Track order status changes"""
+    order = models.ForeignKey(
+        BaseOrder, on_delete=models.CASCADE, related_name='tracking_history')
+    status = models.CharField(max_length=20, choices=BaseOrder.STATUS_CHOICES)
+    notes = models.TextField(blank=True)
+
+    class Meta:
+        ordering = ['-created_at']
