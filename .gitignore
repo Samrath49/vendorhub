@@ -4,3 +4,4 @@ __pycache__/
 .env
 db.sqlite3
 folder_structure.txt
+VendorHub API/auth.bru
