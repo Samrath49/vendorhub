@@ -1,13 +1,15 @@
-from ..base.service import BaseService
-from .models import Product
+from services.base.service import BaseService
+from services.base.models import Product
 from django.db import transaction
-
 
 class ProductService(BaseService):
     def update_inventory(self, product_id, quantity, operation='decrease'):
         try:
             with transaction.atomic():
-                product = Product.objects.select_for_update().get(id=product_id)
+                product = Product.objects.select_for_update().get(
+                    id=product_id,
+                    vendor=self.context.get('vendor')
+                )
                 if operation == 'decrease':
                     if product.stock < quantity:
                         self.add_error("Insufficient stock")
@@ -16,13 +18,14 @@ class ProductService(BaseService):
                 else:
                     product.stock += quantity
                 product.save()
+                
+                if product.stock <= product.low_stock_threshold:
+                    self.notify_low_stock(product)
                 return True
         except Product.DoesNotExist:
             self.add_error("Product not found")
             return False
 
-    def check_low_stock(self, product_id):
-        product = Product.objects.get(id=product_id)
-        if product.stock <= product.low_stock_threshold:
-            # Send notification instead of signal
-            self.notify_low_stock(product)
+    def notify_low_stock(self, product):
+        # Implement notification logic
+        pass
