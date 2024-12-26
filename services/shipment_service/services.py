@@ -1,5 +1,5 @@
 from ..base.service import BaseService
-from .models import Shipment
+from services.base.models import Shipment
 from django.db import transaction
 
 
