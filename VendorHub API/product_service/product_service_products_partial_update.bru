@@ -1,0 +1,30 @@
+meta {
+  name: product_service_products_partial_update
+  type: http
+  seq: 5
+}
+
+patch {
+  url: {{baseUrl}}/api/product_service/products/:id/
+  body: json
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "",
+    "price": "",
+    "stock": "",
+    "is_active": "",
+    "vendor_id": ""
+  }
+}

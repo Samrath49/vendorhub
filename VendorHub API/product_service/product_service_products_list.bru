@@ -1,0 +1,19 @@
+meta {
+  name: product_service_products_list
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{baseUrl}}/api/product_service/products/
+  body: none
+  auth: bearer
+}
+
+params:query {
+  ~page: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

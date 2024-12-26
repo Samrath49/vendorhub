@@ -1,0 +1,19 @@
+meta {
+  name: product_service_products_retrieve
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/product_service/products/:id/
+  body: none
+  auth: bearer
+}
+
+params:path {
+  id: 
+}
+
+auth:bearer {
+  token: {{token}}
+}

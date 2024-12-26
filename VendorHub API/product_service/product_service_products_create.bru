@@ -1,0 +1,26 @@
+meta {
+  name: product_service_products_create
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/product_service/products/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "name": "",
+    "description": "",
+    "price": "",
+    "stock": "",
+    "is_active": "",
+    "vendor_id": ""
+  }
+}
