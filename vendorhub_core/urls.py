@@ -27,6 +27,7 @@ def health_check(request):
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("health/", health_check),
+    path('api/', include('services.base.urls')),
     path('api/order_service/', include('services.order_service.urls')),
     path('api/product_service/', include('services.product_service.urls')),
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
