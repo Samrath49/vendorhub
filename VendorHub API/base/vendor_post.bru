@@ -1,0 +1,31 @@
+meta {
+  name: vendor_post
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/api/vendors/
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{token}}
+}
+
+body:json {
+  {
+    "user": 2,
+    "business_name": "Greenfield Organics",
+    "description": "Supplier of organic fruits and vegetables.",
+    "is_active": false,
+    "commission_rate": 15.00,
+    "payment_details": {
+      "bank_name": "EcoBank",
+      "account_number": "9876543210",
+      "ifsc_code": "ECOB0009876",
+      "payment_terms": "Net 30 days"
+    }
+  }
+}
