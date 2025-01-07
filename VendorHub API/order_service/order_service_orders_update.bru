@@ -11,7 +11,7 @@ put {
 }
 
 params:path {
-  id: 
+  id: 1
 }
 
 auth:bearer {
@@ -20,16 +20,17 @@ auth:bearer {
 
 body:json {
   {
-    "user": "",
-    "total_amount": "",
-    "status": "",
-    "shipping_address": "",
+    "user": 1,
+    "total_amount": "2500.00",
+    "status": "PAID",
+    "shipping_address": "Shivaji Nagar, Mumbai",
     "items": [
       {
-        "product": "",
-        "quantity": "",
-        "price": "",
-        "vendor": ""
+        "product": 2,
+        "product_id": 2,
+        "quantity": 1,
+        "price": "2500.00",
+        "vendor": 1
       }
     ]
   }
